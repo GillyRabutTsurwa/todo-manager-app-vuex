@@ -1,24 +1,22 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <Todos />
   </div>
 </template>
 
 <script>
-
+import Todos from "./components/Todos";
 export default {
   name: 'App',
   components: {
-    
+    Todos: Todos
   },
   computed: {
    
   },
   methods: {
 
-  },
-  created() {
-   
   }
 }
 </script>
