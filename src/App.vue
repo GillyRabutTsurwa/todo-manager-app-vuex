@@ -14,13 +14,13 @@ export default {
     HelloWorld
   },
   computed: {
-    allTodos() {
-      return this.$store.getters.allTodos;
-    }
+   
+  },
+  methods: {
+
   },
   created() {
-   console.log(this.$store.state);
-   console.log(this.allTodos)
+   
   }
 }
 </script>
