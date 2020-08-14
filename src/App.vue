@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <div class="top">
+      <img alt="Vue logo" src="./assets/logo.png">
+      <h1 class="app__title">Todo Manager App</h1>
+      <h2>Toggle to go here</h2>
+    </div>
     <Todos />
   </div>
 </template>
@@ -31,10 +35,15 @@ export default {
   text-align: center;
   color: #2c3e50;
 
+  .top {
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 2rem;
+  }
+
   img {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
     width: 2rem;
     height: 2rem;
   }
