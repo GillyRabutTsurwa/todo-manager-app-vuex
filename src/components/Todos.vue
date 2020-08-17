@@ -1,6 +1,6 @@
 <template>
   <div class="todos">
-    <CurrentTodo v-bind:titleProp="currentTodo.title" v-for="(currentTodo, index) in allTodos" v-bind:key="index" class="todo" />
+    <CurrentTodo v-bind:titleProp="currentTodo.title" v-bind:idProp="currentTodo.id" v-for="(currentTodo, index) in allTodos" v-bind:key="index" />
   </div>
 </template>
 
@@ -33,7 +33,9 @@ export default {
   gap: 1rem;
   padding: 3rem;
 }
-.todos .todo {
+
+/* J'ai deplacé ce code à CurrentTodo.vue (l'enfant), aussi que la classe todo */
+/* .todos .todo {
   border: 1px solid #ccc;
   background-color: #41b883;
   padding: 1rem;
@@ -42,5 +44,5 @@ export default {
   position: relative;
   cursor: pointer;
   font-size: 1.6rem;
-}
+} */
 </style>

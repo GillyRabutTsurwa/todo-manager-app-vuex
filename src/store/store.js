@@ -13,9 +13,10 @@ export const store = new Vuex.Store({
 	},
 	mutations: {
 		setTodos: (state, todosPayload) => (state.todos = todosPayload),
-		//NEW: Mutation for adding todo
-		// We setting our state.todos array to be our newTodos Plus the original todos that were already in the array
-		newTodo: (state, newTodoPayload) => (state.todos = [ newTodoPayload, ...state.todos ])
+		newTodo: (state, newTodoPayload) => (state.todos = [ newTodoPayload, ...state.todos ]),
+		//NEW:
+		removeTodo: (state, idPayload) =>
+			(state.todos = state.todos.filter((currentTodo) => currentTodo.id !== idPayload))
 	},
 	actions: {
 		/**
@@ -28,7 +29,8 @@ export const store = new Vuex.Store({
 			try {
 				const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
 				let data = response.data;
-				console.log(data);
+				// console.log(data);
+				console.table(data);
 				context.commit("setTodos", data);
 			} catch (error) {
 				console.warn(error);
@@ -42,6 +44,14 @@ export const store = new Vuex.Store({
 				});
 				context.commit("newTodo", response.data);
 				console.log(response);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async deleteTodo(context, id) {
+			try {
+				await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+				context.commit("removeTodo", id);
 			} catch (error) {
 				console.log(error);
 			}
