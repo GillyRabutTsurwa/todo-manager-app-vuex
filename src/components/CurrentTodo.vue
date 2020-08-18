@@ -1,30 +1,55 @@
 <template>
-  <div class="todo">
-    <p class="todo__title">{{titleProp}}</p>
-    <i @click="deleteTodo(idProp)" class="fas fa-trash todo__icon--delete"></i>
+  <div @click="$emit('edit')" class="todo">
+    <p class="todo__title">{{todoProp.title}}</p>
+
+    <div class="todo__icons">
+      <i @click="showModal" class="fas fa-edit todo__icon--edit"></i>
+      <i @click="deleteTodo(todoProp.id)" class="fas fa-trash todo__icon--delete"></i>
+    </div>
+
+    <!-- Modal funcitonality as success -->
+    <!-- <UpdateModal v-if="isModalShowing" v-on:modalClose="fermerModal($event)" /> -->
   </div>
+
 </template>
 
 <script>
+// import UpdateModal from "./UpdateTodoModal";
 export default {
+    // //NEW:
+    // data() {
+    //     return {
+    //         isModalShowing: false
+    //     }
+    // },
+    components: {
+        // UpdateModal: UpdateModal
+    },
     props: {
-        titleProp: {
-            type: String,
-            required: true
-        },
-        idProp: {
-            type: Number,
+        // titleProp: {
+        //     type: String,
+        //     required: true
+        // },
+        // idProp: {
+        //     type: Number,
+        //     required: true
+        // }
+        // Above code is no longer used, because we are taking in the entire object as a prop, and not the title and the id individually.
+        todoProp: {
+            type: Object,
             required: true
         }
     },
     methods: {
         deleteTodo(id) {
-            console.log(id);
-            // deleteTodo above is name we are giving for method to run when we click our icon.
-            //deleteTodo before is the name of the action we gave in our store, which calls our mutation, removeTodo
-            // Ils sont pas pareils.
             this.$store.dispatch("deleteTodo", id);
-        }
+        },
+        showModal() {
+          this.$emit("modalOpen", true)
+        }, 
+        // fermerModal(eventData) {
+        //     this.isModalShowing = eventData;
+        // }
     }
 }
 </script>
@@ -49,7 +74,20 @@ export default {
   display: inline-block;
   margin: 0.5rem;
 }
-.todo__icon--delete {
-  align-self: flex-end;
+.todo__icons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
+
+.is-complete {
+  background-color: #35495e;
+  color: #fff;
+}
+/* .todo__icon--edit {
+  
+} */
+/* .todo__icon--delete {
+  
+} */
 </style>

@@ -14,9 +14,16 @@ export const store = new Vuex.Store({
 	mutations: {
 		setTodos: (state, todosPayload) => (state.todos = todosPayload),
 		newTodo: (state, newTodoPayload) => (state.todos = [ newTodoPayload, ...state.todos ]),
-		//NEW:
 		removeTodo: (state, idPayload) =>
-			(state.todos = state.todos.filter((currentTodo) => currentTodo.id !== idPayload))
+			(state.todos = state.todos.filter((currentTodo) => currentTodo.id !== idPayload)),
+		editTodo: (state, updatedTodoPayload) => {
+			const index = state.todos.findIndex(
+				(currentTodo) => currentTodo.id === updatedTodoPayload.id
+			);
+			if (index !== -1) {
+				state.todos.splice(index, 1, updatedTodoPayload);
+			}
+		}
 	},
 	actions: {
 		/**
@@ -30,7 +37,7 @@ export const store = new Vuex.Store({
 				const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
 				let data = response.data;
 				// console.log(data);
-				console.table(data);
+				// console.table(data);
 				context.commit("setTodos", data);
 			} catch (error) {
 				console.warn(error);
@@ -55,6 +62,14 @@ export const store = new Vuex.Store({
 			} catch (error) {
 				console.log(error);
 			}
+		},
+		async updateTodo(context, updatedTodo) {
+			const response = await axios.put(
+				`https://jsonplaceholder.typicode.com/todos/${updatedTodo.id}`,
+				updatedTodo
+			);
+			console.log(response.data);
+			context.commit("editTodo", response.data);
 		}
 	},
 	modules: {}
