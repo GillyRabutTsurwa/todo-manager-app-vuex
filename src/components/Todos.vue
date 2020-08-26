@@ -1,67 +1,23 @@
 <template>
   <div class="todos">
-    <!-- Instead of passing a title prop and an id prop separately, I will pass the entire object and deal with it accordingly in child component, so below -->
-    <!-- <CurrentTodo v-bind:titleProp="currentTodo.title" v-bind:idProp="currentTodo.id" v-for="(currentTodo, index) in allTodos" v-bind:key="index" /> -->
-    <!-- will become -->
-    <CurrentTodo v-on:edit="updateOnDblClick(currentTodo)" v-on:modalOpen="ouvrirModal($event)" v-for="(currentTodo, index) in allTodos" v-bind:key="index" v-bind:todoProp="currentTodo" v-bind:class="{'is-complete': currentTodo.completed}" />
-
-    <UpdateModal v-if="isModalShowing" v-on:modalClose="fermerModal($event)" v-on:editTitle="titleUpdate($event)" />
-
+    <CurrentTodo v-bind:titleProp="currentTodo.title" v-bind:idProp="currentTodo.id" v-for="(currentTodo, index) in allTodos" v-bind:key="index" />
   </div>
 </template>
 
 <script>
 import CurrentTodo from "./CurrentTodo";
-import UpdateModal from "./UpdateTodoModal";
 export default {
     name: "Todos",
-    //NEW:
-    data() {
-        return {
-            isModalShowing: false,
-            updatedTitle: ""
-        }
-    },
     components: {
-        CurrentTodo: CurrentTodo,
-        UpdateModal: UpdateModal
-    },
+      CurrentTodo: CurrentTodo
+    }, 
     computed: {
         allTodos() {
-            return this.$store.getters.allTodos;
+          return this.$store.getters.allTodos;
         }
-    },
+    }, 
     methods: {
-      test() {
-        console.log(123)
-      },
-      ouvrirModal(eventData) {
-            this.isModalShowing = eventData;
-      },
-      fermerModal(eventData) {
-            this.isModalShowing = eventData;
-      },
-      titleUpdate(eventData) {
-        // console.log(eventData);
-        // return eventData;
-        if (eventData !== "") {
-          this.updatedTitle = eventData;
-        }
-        this.isModalShowing = false;
-      },
-      updateOnDblClick(todoObj) {
-        const updatedTodo = {
-          id: todoObj.id,
-          // title: todoObj.title,
-          title: this.updatedTitle,
-          completed: !todoObj.completed
-        }; 
 
-        if (updatedTodo.title !== "") {
-          this.$store.dispatch("updateTodo", updatedTodo);
-        }
-        console.log(updatedTodo);
-      },
     },
     created() {
         console.log(this.$store);
