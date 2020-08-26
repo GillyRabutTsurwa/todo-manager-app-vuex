@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="top">
-      <img class="logo" alt="Vue logo" src="./assets/logo.png">
+      <i class="devicon-vuejs-plain logo"></i>
       <h1 class="app__title">Todo Manager App</h1>
       <h2>Toggle to go here</h2>
     </div>
@@ -36,30 +36,34 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  // color: #2c3e50;
+  color: #e8ffe5;
 
   .top {
     height: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem 2rem;
+    margin: 1.5rem 2rem;
   }
 
-  img {
-    width: 2rem;
-    height: 2rem;
-    perspective: 160rem;
-
+  .logo {
+    font-size: 5rem;
     animation-name: logoSpin;
     animation-iteration-count: infinite;
     animation-duration: 5s;
     animation-timing-function: linear;
-
-    &:hover {
-      transform: rotateY(180deg);
-    }
+    perspective: 160rem;
   }
+
+  // img {
+  //   width: 2rem;
+  //   height: 2rem;
+
+  //   &:hover {
+  //     transform: rotateY(180deg);
+  //   }
+  // }
 }
 
 // animations

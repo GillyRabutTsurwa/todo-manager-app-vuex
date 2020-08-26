@@ -9,13 +9,13 @@ import CurrentTodo from "./CurrentTodo";
 export default {
     name: "Todos",
     components: {
-        CurrentTodo: CurrentTodo
-    },
+      CurrentTodo: CurrentTodo
+    }, 
     computed: {
         allTodos() {
-            return this.$store.getters.allTodos;
+          return this.$store.getters.allTodos;
         }
-    },
+    }, 
     methods: {
 
     },
