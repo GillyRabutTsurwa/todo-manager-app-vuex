@@ -1,12 +1,10 @@
 <template>
-  <div class="testing-123">
-    <h2>Mes "Todos" se trouveront ici</h2>
-  </div>
+  <h2>Bonjour à mon app. Je vais coder cette partie à la fin</h2>
 </template>
 
 <script>
 export default {
-  name: "TodoList",
+  name: "Bonjour",
 };
 </script>
 
