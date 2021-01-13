@@ -1,18 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <StoreTest />
+    <h2>This is the Home page. Je vais la coder vers la fin</h2>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import StoreTest from "@/components/StoreTest.vue";
-
 export default {
   name: "Home",
-  components: {
-    StoreTest: StoreTest,
-  },
 };
 </script>
