@@ -1,35 +1,28 @@
+import axios from "axios";
+
 const state = {
-  todos: [
-    {
-      id: 1,
-      title: "Aller au boulot",
-      completed: true,
-    },
-    {
-      id: 2,
-      title: "Lire la documentation de Sass",
-      completed: true,
-    },
-    {
-      id: 3,
-      title: "Finir mon app de Vuex",
-      completed: false,
-    },
-    {
-      id: 4,
-      title: "Lire ma Bible",
-      completed: false,
-    },
-  ],
+  todos: [],
 };
 
 const getters = {
   allTodos: (state) => state.todos,
 };
 
-const mutations = {};
+const mutations = {
+  setTodos: (state, todosPayload) => (state.todos = todosPayload),
+};
 
-const actions = {};
+const actions = {
+  async fetchAllTodos(context) {
+    const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
+    console.log(response);
+
+    const data = response.data;
+    console.log(data);
+    // set our state.todos to be the data from this axios get request by calling our setTodos mutation
+    context.commit("setTodos", data);
+  },
+};
 
 export default {
   state: state,

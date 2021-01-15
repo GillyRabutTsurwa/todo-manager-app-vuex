@@ -1,6 +1,6 @@
 <template>
   <div class="todosList">
-    <div v-for="currentTodo in todos" v-bind:key="currentTodo.id" v-bind:class="{'is-completed': currentTodo.completed}">
+    <div v-for="currentTodo in todos" v-bind:key="currentTodo.id">
       <p> Task #{{currentTodo.id}} {{currentTodo.title}} </p>
       <p> {{currentTodo.completed}} </p>
     </div>
@@ -15,10 +15,17 @@ export default {
       return this.$store.getters.allTodos;
     },
   },
+  // we call actions using methods.
+  // dans ce cas on va pas utiliser d'evenement mais cette methode sera executer dès que ce composant est créée. donc on va creer la methode et l'appeler dans notre hook created
+  methods: {
+    obtenirTodos() {
+      this.$store.dispatch("fetchAllTodos");
+    },
+  },
   created() {
     const storeInfo = this.$store;
     console.log(storeInfo);
-    console.log(this.todos);
+    this.obtenirTodos();
   },
 };
 </script>
