@@ -1,4 +1,6 @@
 <template>
+  <h1>Todo Manager App</h1>
+  <h6>Powered By Vuex</h6>
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/todos">View Todos</router-link>

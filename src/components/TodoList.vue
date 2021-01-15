@@ -1,15 +1,17 @@
 <template>
   <div class="todosList">
-    <div v-for="currentTodo in todos" v-bind:key="currentTodo.id">
-      <p> Task #{{currentTodo.id}} {{currentTodo.title}} </p>
-      <p> {{currentTodo.completed}} </p>
-    </div>
+    <!-- NOTE: got rid of the markup, put it in its own component (Todo.vue) and using it here as the child component. look at the previous branch for the markup if needed. -->
+    <Todo v-for="currentTodo in todos" v-bind:key="currentTodo.id" v-bind:todoObjProp="currentTodo" />
   </div>
 </template>
 
 <script>
+import Todo from "@/components/Todo.vue";
 export default {
   name: "TodoList",
+  components: {
+    Todo: Todo,
+  },
   computed: {
     todos() {
       return this.$store.getters.allTodos;
@@ -19,6 +21,7 @@ export default {
   // dans ce cas on va pas utiliser d'evenement mais cette methode sera executer dès que ce composant est créée. donc on va creer la methode et l'appeler dans notre hook created
   methods: {
     obtenirTodos() {
+      // we call actions using the dispatch() in the store object
       this.$store.dispatch("fetchAllTodos");
     },
   },
