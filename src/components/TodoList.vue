@@ -1,12 +1,25 @@
 <template>
-  <div class="testing-123">
-    <h2>Mes "Todos" se trouveront ici</h2>
+  <div class="todosList">
+    <div v-for="currentTodo in todos" v-bind:key="currentTodo.id" v-bind:class="{'is-completed': currentTodo.completed}">
+      <p> Task #{{currentTodo.id}} {{currentTodo.title}} </p>
+      <p> {{currentTodo.completed}} </p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "TodoList",
+  computed: {
+    todos() {
+      return this.$store.getters.allTodos;
+    },
+  },
+  created() {
+    const storeInfo = this.$store;
+    console.log(storeInfo);
+    console.log(this.todos);
+  },
 };
 </script>
 
@@ -25,5 +38,10 @@ li {
 }
 a {
   color: #42b983;
+}
+
+// dynamic completed class
+.is-completed {
+  text-decoration: line-through;
 }
 </style>
