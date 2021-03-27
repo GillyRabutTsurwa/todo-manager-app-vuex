@@ -17,6 +17,10 @@
   // color: $primo;
 }
 
+h1 {
+  font-family: Poppins, sans-serif;
+}
+
 #nav {
   padding: 30px;
 

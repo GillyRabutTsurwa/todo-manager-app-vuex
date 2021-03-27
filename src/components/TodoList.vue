@@ -1,7 +1,6 @@
 <template>
-  <div class="todosList">
-    <!-- NOTE: got rid of the markup, put it in its own component (Todo.vue) and using it here as the child component. look at the previous branch for the markup if needed. -->
-    <Todo v-for="currentTodo in todos" v-bind:key="currentTodo.id" v-bind:todoObjProp="currentTodo" />
+  <div class="todos-list">
+    <Todo v-for="currentTodo in todos" v-bind:key="currentTodo.id" v-bind:todoObjProp="currentTodo" class="currentTodo" />
   </div>
 </template>
 
@@ -35,6 +34,23 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.todos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+  gap: 1rem;
+  justify-content: center;
+}
+
+.todos-list .currentTodo {
+  position: relative;
+  border: 1px solid #ccc;
+  background-color: #41b833;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+}
+
 h3 {
   margin: 40px 0 0;
 }
